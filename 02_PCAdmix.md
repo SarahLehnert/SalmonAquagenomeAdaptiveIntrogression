@@ -1,4 +1,4 @@
-```
+
 Workflow for setting up files for PCAdmix and running analyses (again, this probably could have been done more efficiently)
 
 First use plink to get list of SNPs and IDs in final dataset to run analyses in vcftools:
