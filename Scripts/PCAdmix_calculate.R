@@ -19,6 +19,7 @@ setwd("~/Desktop/Software/PCAdmix/")
 
 #Read in results from pcadapt (.vit and position of windows .markers)
 
+
 #For loop here is strickly for plotting results (exploring data) per chromsome - other script below will combine data for all chromosomes and save
 #plots were not used in manuscript 
 
