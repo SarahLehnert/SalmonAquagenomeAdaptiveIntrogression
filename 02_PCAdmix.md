@@ -13,11 +13,11 @@ For PCAdmix require 2 pure groups and 1 admixed group: subset for these groups n
 #Subset Canada (pure group)
 vcftools --vcf /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/vcf_files/Final_Combined_VCF/Phase_Impute/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed.vcf --snps /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/SNP_list_all.txt --phased --keep /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/Canada_IDs_original.txt --recode --out /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_phased.vcf 
 
-#Subset Southern Norway (pure group)
-vcftools --vcf /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/vcf_files/Final_Combined_VCF/Phase_Impute/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed.vcf --snps /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/SNP_list_all.txt --phased --keep /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/SouthernNorway_IDs_original.txt --recode --out /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_phased.vcf 
+#Subset East Atlantic (Southern Norway including landlocked) (pure group)
+vcftools --vcf /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/vcf_files/Final_Combined_VCF/Phase_Impute/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed.vcf --snps /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/SNP_list_all.txt --phased --keep /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/SouthernNorwayLL_IDs_original.txt --recode --out /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_phased.vcf 
 
-#Subset Finnmark (Western Barents) (admixed group)
-vcftools --vcf /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/vcf_files/Final_Combined_VCF/Phase_Impute/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed.vcf --snps /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/SNP_list_all.txt --phased --keep /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/Finnmark_IDs_original.txt --recode --out /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_phased.vcf 
+#Subset Western Barents and White Sea group (admixed group)
+vcftools --vcf /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/vcf_files/Final_Combined_VCF/Phase_Impute/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed.vcf --snps /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/SNP_list_all.txt --phased --keep /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/FinnmarkWhite_IDs_original.txt --recode --out /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_phased.vcf 
 ```
 
 Next need to get map for each chromosome to specify what SNPs to use as chromosomes are run seperately
@@ -46,7 +46,6 @@ cat /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_
 
 cat /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_phased.vcf.recode.vcf | java -jar vcf2beagle.jar -1 /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle
 
-cat /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_BALTIC_phased.vcf.recode.vcf | java -jar vcf2beagle.jar -1 /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_BALTIC_converted_beagle
 ```
 Run PCAdmix, here we used 100 SNP windows and ran each chromosome seperately. 
 
@@ -58,27 +57,27 @@ Run PCAdmix, here we used 100 SNP windows and ran each chromosome seperately.
 #no pruning was done here.
 
 cd Desktop/Software/PCAdmix
-for i in {1..5}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa0${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa0${i}_WGS_FinnmarkIntrogress_june1_2020; done
+for i in {1..5}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa0${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa0${i}_WGS_FinnmarkIntrogress_jan_2025; done
 
 cd Desktop/Software/PCAdmix
-for i in {6..9}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa0${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa0${i}_WGS_FinnmarkIntrogress_june1_2020; done
-
-cd Desktop/Software/PCAdmix
-
-for i in {10..15}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa${i}_WGS_FinnmarkIntrogress_june1_2020; done 
-
+for i in {6..9}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa0${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa0${i}_WGS_FinnmarkIntrogress_jan_2025; done
 
 cd Desktop/Software/PCAdmix
 
-for i in {16..20}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa${i}_WGS_FinnmarkIntrogress_june1_2020; done
+for i in {10..15}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa${i}_WGS_FinnmarkIntrogress_jan_2025; done 
+
 
 cd Desktop/Software/PCAdmix
 
-for i in {21..25}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa${i}_WGS_FinnmarkIntrogress_june1_2020; done
+for i in {16..20}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa${i}_WGS_FinnmarkIntrogress_jan_2025; done
 
 cd Desktop/Software/PCAdmix
 
-for i in {26..29}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa${i}_WGS_FinnmarkIntrogress_june1_2020; done
+for i in {21..25}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa${i}_WGS_FinnmarkIntrogress_jan_2025; done
+
+cd Desktop/Software/PCAdmix
+
+for i in {26..29}; do ./PCAdmix3_macOSX -anc /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_SOUTHERNNORWAY_converted_beagle.bgl /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_CANADA_converted_beagle.bgl -adm /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa_combined_wgs_for_pcadmix_FINNMARK_converted_beagle.bgl -map /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Pcadmix/ssa${i}all_snps_all_inds.map  -w 100 -prune 0 -ld 0 -o ssa${i}_WGS_FinnmarkIntrogress_jan_2025; done
 ```
 
 After running PCadmix - results were imported into R for further analyses - see scripts
