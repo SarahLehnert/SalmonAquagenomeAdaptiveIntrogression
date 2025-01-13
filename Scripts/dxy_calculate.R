@@ -16,8 +16,8 @@ map$Pos=as.numeric(as.character(map$Pos))
 fam=read.table("ssa_combined_wgs_aquagenome_finnmark_canada_for_dxy.fam", header=F)
 fam$intersect=interaction(fam$V1, fam$V2, sep = "_")
 
-EU_POP <-as.character(fam$intersect[which(fam$V1=="Finnmark")])
-NA_POP <- as.character(fam$intersect[which(fam$V1=="Newfoundland" | fam$V1=="Labrador"| fam$V1=="QC" | fam$V1=="QC_northeast")])
+EU_POP <-as.character(fam$intersect[which(fam$V1=="BarentsWhiteSea")])
+NA_POP <- as.character(fam$intersect[which(fam$V1=="Newfoundland" | fam$V1=="Labrador"| fam$V1=="StLawrence")])
 
 #loop to read in chromosomes and get dxy
 for(i in 1:9){
@@ -120,8 +120,8 @@ for(i in 10:29){
 fam2=read.table("ssa_combined_wgs_aquagenome_southernnorway_canada_for_dxy.fam", header=F)
 fam2$intersect=interaction(fam2$V1, fam2$V2, sep = "_")
 
-EU_POP_South <-as.character(fam2$intersect[which(fam2$V1=="SouthernNorway")])
-NA_POP <- as.character(fam2$intersect[which(fam2$V1=="Newfoundland" | fam2$V1=="QC" | fam2$V1=="QC_northeast"| fam2$V1=="Labrador")])
+EU_POP_South <-as.character(fam2$intersect[which(fam2$V1=="EastAtlantic")])
+NA_POP <- as.character(fam2$intersect[which(fam2$V1=="Newfoundland" | fam2$V1=="StLawrence" | fam2$V1=="Labrador")])
 
 
 
