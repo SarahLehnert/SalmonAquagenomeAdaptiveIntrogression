@@ -37,20 +37,12 @@ cd  ~/Desktop/Software/plink_mac_20200219
 
 #Then update IDs with geographic regions
 
-./plink --bfile /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/vcf_files/Final_Combined_VCF/Phase_Impute/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids --make-bed --allow-extra-chr --update-ids /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/vcf_files/Update_IDs2_cluster_region.txt --out /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/vcf_files/Final_Combined_VCF/Phase_Impute/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION
+./plink --bfile /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/vcf_files/Final_Combined_VCF/Phase_Impute/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids --make-bed --allow-extra-chr --update-ids /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/vcf_files/Update_IDs3_cluster_region.txt --out /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/vcf_files/Final_Combined_VCF/Phase_Impute/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION
 
 ##Copy files to treemix folder
 #Get allele frequency file for treemix
-
-./plink --bfile /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Treemix/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION --freq --family --allow-extra-chr --out /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Treemix/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION_freq
-
 ##Should do maf>0.01 again after imputing/phasing just in case (just remove 710 loci)
-.
-/plink --bfile /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Treemix/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION --maf 0.01 --allow-extra-chr --make-bed --out /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Treemix/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION_maf_after_phasing
-
-##Copy files to treemix folder
-#Get allele frequency file for treemix
-#This is file used for final analyses
+./plink --bfile /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Treemix/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION --maf 0.01 --allow-extra-chr --make-bed --out /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Treemix/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION_maf_after_phasing
 
 ./plink --bfile /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Treemix/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION_maf_after_phasing --freq --family --allow-extra-chr --out /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Treemix/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION_maf_after_phasing_allelefreq
 
@@ -69,7 +61,7 @@ cd treemix-1.13/src/
 ############################
 #run plink2treemix script to convert format
 
-./plink2treemix.py /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Treemix/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION_maf_after_phasing_allelefreq.frq.strat.gz WGS_Salmo_for_threepop_REGIONS_may_28_2020_MAF001_after.gz
+./plink2treemix.py /Users/ianbradbury/Desktop/Sarah/Salmon/WGS_Aquagenome/Treemix/ssa_combined_wgs_aquagenome_biallelic_PASS_maf001_phased_imputed_plink_update_ids_by_REGION_maf_after_phasing_allelefreq.frq.strat.gz WGS_Salmo_for_threepop_REGIONS_jan_2025.gz
 ```
 Run treepop test in treemix 
 
@@ -77,12 +69,12 @@ Run treepop test in treemix
 #Use 500 SNP windows
 #this will take a while -- no way to multithread??? 
 #note that .gz file was saved in treemix/src folder
-./threepop -i WGS_Salmo_for_threepop_REGIONS_may_28_2020_MAF001_after.gz -k 500 > results_threepop_WGS_salmon_by_REGION_may_28_2020_maf001_after
+./threepop -i WGS_Salmo_for_threepop_REGIONS_jan_2025.gz -k 500 > results_threepop_WGS_salmon_by_REGION_Jan_2025
 
 ```
 Save Treemix results 
 ```
 ############################
 #save output (remove extra parts that are not needed in text)
-cat results_threepop_WGS_salmon_by_REGION_may_28_2020_maf001_after|grep -v Estimating |grep -v nsnp|tr '' ' ' > WGS_salmonpops_results_threepop_final_by_Region_500snp_window_may28_2020_maf001_after
+cat results_threepop_WGS_salmon_by_REGION_Jan_2025|grep -v Estimating |grep -v nsnp|tr '' ' ' > WGS_salmonpops_results_threepop_final_by_Region_500snp_window_jan2025
 ```
