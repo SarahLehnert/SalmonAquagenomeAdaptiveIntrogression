@@ -2,7 +2,7 @@
 Notes for running analyses for WGS aquagenome project
 Adaptive Introgression analyses - SL
 
-This workflow includes initial filtering and Treemix threepop analysis
+This workflow includes initial filtering and Treemix threepop analysis.
 Scripts could be updated for efficiency, written awhile ago...
 
 Initial filtering step:
