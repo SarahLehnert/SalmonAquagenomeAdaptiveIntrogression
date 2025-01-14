@@ -99,3 +99,13 @@ ggsave(plot=figure3,
   dpi = 300,
   bg = NULL)
 
+
+ggsave(plot=figure3, 
+       filename = "Figure3_treemix_dxy_pcadmix_results.png",
+       width = 16.70,
+       height = 7.32, units="in",
+       device='png', dpi=320,
+       bg = NULL)
+
+
+
