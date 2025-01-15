@@ -185,6 +185,7 @@ block_counts<-read.csv("~/Desktop/Sarah/Salmon/WGS_Aquagenome/Compare_Introgress
 head(block_counts)
 
 #Summary table with size of outlier blocks and positions
+#Note that the number out outliers within the blocks for each metric represents sum of outliers detected for sliding window approach - therefore this should be adjusted for duplicates 
 summary_table<- block_counts %>%
   group_by(Genomic_block_in_order) %>%
   summarise(Chr= min(Chr), Start = min(Window.start.position), End = max(Window.end.position), Pcadmix=sum(Pcadmix.outlier),
